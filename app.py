@@ -2,6 +2,7 @@ import os
 import re
 from flask import Flask, render_template, request, flash, redirect, session
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import create_engine
 
 from login import login_required
 
@@ -12,6 +13,9 @@ from flask_session import Session
 
 app = Flask(__name__)
 app.secret_key = "sd4322@$#*(DChdwd"
+uri = os.getenv("DATABASE_URL")  # or other relevant config var
+if uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
 
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_FILE_DIR"] = mkdtemp()
@@ -29,15 +33,17 @@ if ENV == "dev":
     ] = "postgresql://postgres:123456@localhost/clinc"
 else:
     app.debug = False
-    app.config[
-        "SQLALCHEMY_DATABASE_URI"
-    ] = "postgres://elktwbviwldjhu:ea9394808d18361a86a583dba81e5a1d82a25c7a9a166a6e21e1ba99493632fb@ec2-35-171-250-21.compute-1.amazonaws.com:5432/dbs5ivltb9f5vc"
+    app.config["SQLALCHEMY_DATABASE_URI"] = uri
     # or other relevant config var
 
     # uri = os.getenv("DATABASE_URL")  # or other relevant config var
     # if uri.startswith("postgres://"):
     #     uri = uri.replace("postgres://", "postgresql://", 1)
     # SQLALCHEMY_DATABASE_URI=uri
+    uri = os.getenv("DATABASE_URL")
+    if uri.startswith("postgres://"):
+        uri = uri.replace("postgres://", "postgresql://")
+    engine = create_engine(uri, echo=True)
 
 
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
