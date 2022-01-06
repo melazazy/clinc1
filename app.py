@@ -29,7 +29,7 @@ if ENV == 'dev':
 
 else:
     app.debug = False
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:ssgljxklyapnty:c70f208e526e2bfb22261167b55851b9a6c4431e0eefa97ad5aabafc4d2da558@ec2-34-239-196-254.compute-1.amazonaws.com:5432/d19lmhttmpl08r'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://ssgljxklyapnty:c70f208e526e2bfb22261167b55851b9a6c4431e0eefa97ad5aabafc4d2da558@ec2-34-239-196-254.compute-1.amazonaws.com:5432/d19lmhttmpl08r'
     # or other relevant config var
 
     # uri = os.getenv("DATABASE_URL")  # or other relevant config var
