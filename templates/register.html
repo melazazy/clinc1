@@ -1,0 +1,40 @@
+{% extends 'layout.html' %} {% block title %} Register {% endblock %}
+
+{% block main %}
+
+<form class="validation" action="/register" method="post">
+    <div class="form-group">
+        <input autocomplete="off" autofocus class="form-control" name="name" placeholder="الاسم" required type="text">
+    </div>
+    <div class="form-group">
+        <input autocomplete="off" autofocus class="form-control" name="phone" placeholder="الهاتف" type="tel" required>
+    </div>
+    <div class="form-group">
+        <input class="form-control" name="password" placeholder="كلمة السر" type="password" required>
+    </div>
+    <div class="form-group">
+        <input class="form-control" name="confirmation" placeholder="اعادة كلمة السر" type="password" required>
+    </div>
+    <div class="form-group">
+        <input autocomplete="off" autofocus class="form-control" name="age" placeholder="السن" type="number">
+    </div>
+    <div class="form-group">
+        <input autocomplete="off" autofocus class="form-control" name="tall" placeholder="الطول" type="number">
+    </div>
+    <div class="form-group">
+        <input autocomplete="off" autofocus class="form-control" name="wight" placeholder="الوزن" type="number">
+    </div>
+    <div class="form-group">
+        <select id="service" class="form-control" name="list" required>
+            <option selected disabled value="">البرنامج ​العلاجي</option>
+            {% for l in list %}
+            <option value="{{ l }}">{{ l }}</option>
+            {% endfor%}
+        </select>
+    </div>
+    <input name="craft" class="btn btn-primary" type="submit" value="التسجيل"></input>
+    <button class="btn btn-secondary" type="reset"> مسح</button>
+</form>
+
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'layout.html' %} {% block title %} التعليمات {% endblock %}
+
+{% block main %}
+<form class="validation" action="/instruct" method="post">
+    <div class="form-group">
+        <select id="service" class="form-control" name="list" required>
+            <option selected disabled value="">رقم المستخدم</option>
+            {% for l in list %}
+            <option value="{{ l.phone }}">{{ l.phone }}</option>
+            {% endfor%}
+        </select>
+    </div>
+    <div class="form-group">
+        <input autocomplete="off" autofocus class="form-control" name="instruct" placeholder="التعليمات" required
+            type="text">
+    </div>
+    <!-- <div class="form-group">
+        <input autocomplete="off" autofocus class="form-control" name="date" placeholder="start From"
+            type="datetime-local">
+    </div> -->
+    <input name="craft" class="btn btn-primary" type="submit" value="التسجيل"></input>
+    <button class="btn btn-secondary" type="reset"> مسح</button>
+</form>
+
+{% endblock %}
