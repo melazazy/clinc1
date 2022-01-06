@@ -20,14 +20,18 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 
-ENV = 'prod'
+ENV = "prod"
 
-if ENV == 'dev':
+if ENV == "dev":
     app.debug = True
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:123456@localhost/clinc'
+    app.config[
+        "SQLALCHEMY_DATABASE_URI"
+    ] = "postgresql://postgres:123456@localhost/clinc"
 else:
     app.debug = False
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://ssgljxklyapnty:c70f208e526e2bfb22261167b55851b9a6c4431e0eefa97ad5aabafc4d2da558@ec2-34-239-196-254.compute-1.amazonaws.com:5432/d19lmhttmpl08r'
+    app.config[
+        "SQLALCHEMY_DATABASE_URI"
+    ] = "postgres://elktwbviwldjhu:ea9394808d18361a86a583dba81e5a1d82a25c7a9a166a6e21e1ba99493632fb@ec2-35-171-250-21.compute-1.amazonaws.com:5432/dbs5ivltb9f5vc"
     # or other relevant config var
 
     # uri = os.getenv("DATABASE_URL")  # or other relevant config var
@@ -36,15 +40,15 @@ else:
     # SQLALCHEMY_DATABASE_URI=uri
 
 
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
 
-LIST = ['hair', 'fit', 'weight', 'skin']
+LIST = ["hair", "fit", "weight", "skin"]
 
 
 class user(db.Model):
-    __tablename__ = 'user'
+    __tablename__ = "user"
     id = db.Column(db.Integer, primary_key=True)
     phone = db.Column(db.String(200), unique=True)
     name = db.Column(db.String(200))
@@ -65,7 +69,7 @@ class user(db.Model):
 
 
 class instructions(db.Model):
-    __tablename__ = 'instructions'
+    __tablename__ = "instructions"
     id = db.Column(db.Integer, primary_key=True)
     user = db.Column(db.String(200))
     instruct = db.Column(db.Text())
@@ -75,14 +79,14 @@ class instructions(db.Model):
         self.instruct = instruct
 
 
-@app.route('/')
+@app.route("/")
 def index():
-    return render_template('index.html')
+    return render_template("index.html")
 
 
-@app.route('/register', methods=['GET', 'POST'])
+@app.route("/register", methods=["GET", "POST"])
 def reg():
-    if request.method == 'POST':
+    if request.method == "POST":
         if request.form.get("password") != request.form.get("confirmation"):
             flash("Not Matched password!!", category="error")
             return render_template("/register.html", list=LIST)
@@ -107,28 +111,28 @@ def reg():
             flash("Phone Number Already Exist!!", category="error")
             return render_template("/register.html", list=LIST)
     else:
-        return render_template('register.html', list=LIST)
+        return render_template("register.html", list=LIST)
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route("/login", methods=["GET", "POST"])
 def login():
-    if request.method == 'POST':
+    if request.method == "POST":
         phone = request.form.get("phone")
         password = request.form.get("password")
         p = db.session.query(user).filter(user.phone == phone)
         if p.count() != 1 or p[0].password != password:
             flash("Phone Number Or Password Is Wrong!!", category="error")
-            return redirect('/')
+            return redirect("/")
         else:
             # flash("Welcome In!", category="succ")
             session["user"] = p[0].phone
             # session["user_id"] = p[0]["id"]
             return render_template("profile.html")
     else:
-        return render_template('login.html')
+        return render_template("login.html")
 
 
-@app.route('/instruct', methods=['GET', 'POST'])
+@app.route("/instruct", methods=["GET", "POST"])
 def inst():
     if request.method == "GET":
         user_list = db.session.query(user).all()
@@ -143,17 +147,16 @@ def inst():
         db.session.commit()
         # flash("instructions Complate!!!!!", category="succ")
         # return render_template("instruct.html")
-        return redirect('/')
+        return redirect("/")
 
 
-@app.route('/profile', methods=['GET', 'POST'])
+@app.route("/profile", methods=["GET", "POST"])
 @login_required
 def prof():
     if request.method == "GET":
         phone = session["user"]
         user_id = db.session.query(user).filter(user.phone == phone)[0].id
-        pdata = db.session.query(instructions).filter(
-            instructions.user == user_id)
+        pdata = db.session.query(instructions).filter(instructions.user == user_id)
         # print(phone)
         # print(user_id)
 
@@ -163,11 +166,11 @@ def prof():
         return render_template("profile.html")
 
 
-@app.route('/logout', methods=['GET', 'POST'])
+@app.route("/logout", methods=["GET", "POST"])
 def logout():
     session.clear()
     return render_template("index.html")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run()
