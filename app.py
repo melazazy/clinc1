@@ -40,10 +40,10 @@ else:
     # if uri.startswith("postgres://"):
     #     uri = uri.replace("postgres://", "postgresql://", 1)
     # SQLALCHEMY_DATABASE_URI=uri
-    uri = os.getenv("DATABASE_URL")
-    if uri.startswith("postgres://"):
-        uri = uri.replace("postgres://", "postgresql://")
-    engine = create_engine(uri, echo=True)
+    # uri = os.getenv("DATABASE_URL")
+    # if uri.startswith("postgres://"):
+    #     uri = uri.replace("postgres://", "postgresql://")
+    # engine = create_engine(uri, echo=True)
 
 
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
