@@ -25,17 +25,15 @@ ENV = 'prod'
 if ENV == 'dev':
     app.debug = True
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:123456@localhost/clinc'
-
-
 else:
     app.debug = False
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://ssgljxklyapnty:c70f208e526e2bfb22261167b55851b9a6c4431e0eefa97ad5aabafc4d2da558@ec2-34-239-196-254.compute-1.amazonaws.com:5432/d19lmhttmpl08r'
+    # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://ssgljxklyapnty:c70f208e526e2bfb22261167b55851b9a6c4431e0eefa97ad5aabafc4d2da558@ec2-34-239-196-254.compute-1.amazonaws.com:5432/d19lmhttmpl08r'
     # or other relevant config var
 
-    # uri = os.getenv("DATABASE_URL")  # or other relevant config var
-    # if uri.startswith("postgres://"):
-    #     uri = uri.replace("postgres://", "postgresql://", 1)
-    # rest of connection code using the connection string `uri`
+    uri = os.getenv("DATABASE_URL")  # or other relevant config var
+    if uri.startswith("postgres://"):
+        uri = uri.replace("postgres://", "postgresql://", 1)
+    SQLALCHEMY_DATABASE_URI=uri
 
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
