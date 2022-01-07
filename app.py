@@ -36,16 +36,6 @@ else:
     app.config["SQLALCHEMY_DATABASE_URI"] = uri
     # or other relevant config var
 
-    # uri = os.getenv("DATABASE_URL")  # or other relevant config var
-    # if uri.startswith("postgres://"):
-    #     uri = uri.replace("postgres://", "postgresql://", 1)
-    # SQLALCHEMY_DATABASE_URI=uri
-    # uri = os.getenv("DATABASE_URL")
-    # if uri.startswith("postgres://"):
-    #     uri = uri.replace("postgres://", "postgresql://")
-    # engine = create_engine(uri, echo=True)
-
-
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
