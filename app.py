@@ -130,8 +130,8 @@ def login():
 
 @app.route("/instruct", methods=["GET", "POST"])
 def inst():
+    user_list = db.session.query(user).all()
     if request.method == "GET":
-        user_list = db.session.query(user).all()
         return render_template("instruct.html", list=user_list)
     else:
         phone = request.form.get("list")
@@ -142,8 +142,7 @@ def inst():
         db.session.add(data)
         db.session.commit()
         # flash("instructions Complate!!!!!", category="succ")
-        # return render_template("instruct.html")
-        return redirect("/")
+        return render_template("instruct.html", list=user_list)
 
 
 @app.route("/profile", methods=["GET", "POST"])
@@ -153,9 +152,6 @@ def prof():
         phone = session["user"]
         user_id = db.session.query(user).filter(user.phone == phone)[0].id
         pdata = db.session.query(instructions).filter(instructions.user == user_id)
-        # print(phone)
-        # print(user_id)
-
         return render_template("profile.html", pdata=pdata)
     else:
 
