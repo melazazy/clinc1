@@ -24,7 +24,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 
-ENV = "dev"
+ENV = "compc"
 
 if ENV == "dev":
     app.debug = True
@@ -225,12 +225,6 @@ def inst():
 def logout():
     session.clear()
     return render_template("index.html")
-
-
-@app.route("/test", methods=["GET", "POST"])
-def test():
-    pdata = db.session.query(instructions).filter(instructions.user_id == 3)
-    return render_template("testing.html", pdata=pdata)
 
 
 @app.route("/profile", methods=["GET", "POST"])
