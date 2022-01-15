@@ -1,0 +1,65 @@
+{% extends 'layout.html' %} {% block title %} testing {% endblock %}
+
+{% block main %}
+
+<section id="about" class="about">
+    <div class="container profile">
+        <div class="row">
+            <div class="col-lg-8 pt-4 pt-lg-0 content aos-init aos-animate" data-aos="fade-left">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <ul>
+                            <li><i class="bi bi-chevron-right"></i> <strong>الاسم:</strong> <input type="text"
+                                    name="name" id="name" value="مصطفى العزازى">
+                            </li>
+                            <li><i class="fas fa-phone"></i> <strong>الهاتف:</strong>
+                                <span>www.example.com</span>
+                            </li>
+                            <li><i class="bi bi-chevron-right"></i> <strong>السن:</strong> <span>+123 456 7890</span>
+                            </li>
+                            <li><i class="bi bi-chevron-right"></i> <strong>الطول:</strong> <span>New York, USA</span>
+                            </li>
+                            <li><i class="bi bi-chevron-right"></i> <strong>الوزن:</strong> <span>30</span></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-6">
+                        <ul>
+                            <li><i class="bi bi-chevron-right"></i> <strong>العظام:</strong> <span>30</span></li>
+                            <li><i class="bi bi-chevron-right"></i> <strong>العضلات:</strong> <span>30</span></li>
+                            <li><i class="bi bi-chevron-right"></i> <strong>الدهون:</strong> <span>Master</span></li>
+                            <li><i class="bi bi-chevron-right"></i> <strong>المياه:</strong>
+                                <span>email@example.com</span>
+                            </li>
+                            <li><i class="bi bi-chevron-right"></i> <strong>السعرات:</strong> <span>Available</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="struc">
+                    <table class="table table-striped text-info">
+                        <thead>
+                            <tr>
+                                <th> id </th>
+                                <th> Activety </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for p in pdata %}
+                            <tr>
+                                <th> {{ p["user"] }} </th>
+                                <td> {{ p["instruct"] }} </td>
+                            </tr>
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+{% endblock %}

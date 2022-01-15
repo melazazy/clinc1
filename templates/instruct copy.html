@@ -1,0 +1,56 @@
+{% extends 'layout.html' %} {% block title %} التعليمات {% endblock %}
+
+{% block main %}
+<form action="/update" method="POST">
+    <select onchange="showCustomer(this.value)" id="phone" class="form-control" name="phone" required>
+        <option selected disabled value="">رقم المستخدم</option>
+        {% for l in list %}
+        <option value="{{ l.phone }}">{{ l.phone }}</option>
+
+        {% endfor%}
+    </select>
+    <input type="hidden" name="hidden_value" id="hidden_value" />
+    <div style="clear:both"></div>
+    <input type="submit" value="upddate">
+</form>
+<form class="validation" action="/instruct" method="post">
+    <div class="data">
+
+    </div>
+    <div class="form-group">
+        <textarea placeholder="التعليمات" class="form-control" aria-label="With textarea"></textarea>
+    </div>
+    <div class="form-group">
+        <input autocomplete="off" autofocus class="form-control" name="date" placeholder="start From"
+            type="datetime-local">
+    </div>
+    <input name="craft" class="btn btn-primary" type="submit" value="التسجيل"></input>
+    <button class="btn btn-secondary" type="reset"> مسح</button>
+</form>
+
+{% endblock %}
+{% block script %}
+<script>
+    $(document).ready(function () {
+        load_data();
+        function load_data(query = '') {
+            $.ajax({
+                url: "/update",
+                method: "POST",
+                data: { query: query },
+                success: function (data) {
+                    $('.data').html(data);
+                    $('.data').append(data.htmlresponse);
+                }
+            })
+        }
+
+        $('#phone').change(function () {
+            $('#hidden_value').val($('#search_filter').val());
+            var query = $('#hidden_value').val();
+            load_data(query);
+        });
+
+    });
+</script>
+{% endblock %}

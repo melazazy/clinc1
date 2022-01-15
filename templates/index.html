@@ -2,5 +2,11 @@
 
 {% block main %}
 
-<h1>Welcome To Clinic Site</h1>
+<h1 style="text-align: right;">اهلا وسهلا بك
+    {% if session.user %}
+    <span class="text-danger">{{session.name}}</span>
+    {%endif%}
+    <p> فى برنامج المتابعة الخاص بصيدلية الدكتور</p>
+    <p>عبدالرحمن صابر</p>
+</h1>
 {% endblock %}

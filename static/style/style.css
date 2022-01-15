@@ -7,10 +7,24 @@ body{
     background-color: rgb(18 34 78);
     color: rgb(247 241 241);
 }
+ul{
+    list-style: none;
+}
 .navbar{
-    position: fixed;
+    /* position: fixed; */
     top: 0;
     width: 100%;
+    background: white;
+    font-size: 16px;
+    font-weight: 900;
+    z-index: 1000;
+}
+.navbar ul li{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+
 }
 .navbar-light .navbar-nav .nav-link {
     font-weight: bolder;
@@ -23,6 +37,7 @@ body{
 /* .mcontainer{
     margin-top: 8%;
 } */
+
 .index-container{
     display: flex;
     justify-content: space-between;
@@ -67,7 +82,7 @@ a .nav-link {
     font-size: 15px;
 }
 
-.p-5{
+.container{
     margin-top: 60px;
 }
 
@@ -236,3 +251,9 @@ table.sortable thead {
 }
 
 /* End Contact Form Style */
+
+html[dir="rtl"] .profile ul{
+    float: right;
+    list-style: none;
+    text-align: right;
+}

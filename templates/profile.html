@@ -1,23 +1,358 @@
 {% extends 'layout.html' %} {% block title %} profile {% endblock %}
 
 {% block main %}
-<table class="table table-striped text-info">
-    <thead>
-        <tr>
-            <th> id </th>
-            <th> Activety </th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for p in pdata %}
-        <tr>
-            <th> {{ p["user"] }} </th>
-            <td> {{ p["instruct"] }} </td>
-        </tr>
-        {% endfor %}
+<!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"> -->
+<div class="row">
+    <div class="col-md-10 col-sm-12">
+        <div class="card user-card">
+            <!-- <div class="card-header">
+                <h5>بيانات المريض</h5>
+            </div> -->
+            <div class="card-block">
+                <div class="row">
+                    <div class="user-image col-4">
+                        {% if usdata[0].gender == 'male' %}
+                        <img src="../static/icons/avatar6.png" class="img-radius" alt="male-Profile-Image">
+                        {%else%}
+                        <img src="../static/icons/avatar8.png" class="img-radius" alt="male-Profile-Image">
+                        {%endif%}
+                    </div>
+                    <div class="textv col-8">
+                        <h6 class="f-w-600 m-t-25 m-b-10">{{usdata[0].name}} </h6>
+                        <p class="text-muted">
+                            {% if usdata[0].gender == 'male' %}
+                            <span> <img src="../static/icons/male.png" alt="strong" width="25px">
+                                ذكر
+                            </span>
+                            {%else%}
+                            <span> <img src="../static/icons/female.png" alt="strong" width="25px"> انثى
+                            </span>
+                            {%endif%}
+                            | <span><img src="../static/icons/height.png" alt="strong" width="25px">
+                                {% if detdata[0]%}
+                                {{detdata[0].tall}}
+                                {% endif %}
+                            </span>
+                            | <span><img src="../static/icons/trans-fat.png" alt="strong" width="25px">
+                                {% if detdata[0]%}
+                                {{detdata[0].fat}}
+                                {% endif %}
+                            </span>
+                            | <span><img src="../static/icons/phone-call.png" alt="strong" width="25px">
+                                {% if usdata[0]%}
+                                {{usdata[0].phone}}
+                                {% endif %}
+                            </span>
+                            |
+                        <p class="text-primary">
+                            {% if usdata[0]%} تاريخ التسجيل :
+                            {{usdata[0].reg_date}}
+                            {% endif %}
+                        </p>
+                        </p>
+                    </div>
+                </div>
+                <hr>
+                <div class="bg-c-green counter-block m-t-10 p-20">
+                    <div class="row">
+                        <div class="col-4">
+                            <!-- <i class="fas fa-steam-square"></i> -->
+                            <img src="../static/icons/trans-fat.png" alt="strong" width="25px" srcset=""> الدهون
+                            <p>
+                                {% if detdata[0]%}
+                                {{detdata[0].fat}}
+                                {% endif %}</p>
+                        </div>
+                        <div class="col-4">
+                            <img src="../static/icons/bone.png" alt="strong" width="25px" srcset=""> العظام
+                            <p>
+                                {% if detdata[0]%}
+                                {{detdata[0].bone}}
+                                {% endif %}</p>
+                        </div>
+                        <div class="col-4">
+                            <img src="../static/icons/drop.png" alt="strong" width="25px" srcset=""> المياه
+                            <p> {% if detdata[0]%}
+                                {{detdata[0].water}}
+                                {% endif %} </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <img src="../static/icons/calorie.png" alt="strong" width="25px" srcset=""> السعرات
+                            <p>{% if detdata[0]%}
+                                {{detdata[0].calories}}
+                                {% endif %}</p>
+                        </div>
+                        <div class="col-4">
+                            <img src="../static/icons/strong.png" alt="strong" width="25px" srcset=""> العضلات
+                            <p>{% if detdata[0]%}
+                                {{detdata[0].muscles}}
+                                {% endif %}</p>
+                        </div>
+                        <div class="col-4">
+                            <img src="../static/icons/scale.png" alt="strong" width="25px" srcset=""> الوزن
+                            <p>{% if detdata[0]%}
+                                {{detdata[0].wight}}
+                                {% endif %}</p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="struc col-md-10 ">
+                    <table class="table table-responsive table-striped text-info ">
+                        <thead>
+                            <tr>
+                                <th> التاريخ </th>
+                                <th> التعليمات </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for p in instdata %}
+                            <tr>
+                                <!-- <th>
+                                    <a class="link" data-bs-toggle="modal" data-bs-target="#more{{ p['instr_id'] }}">{{
+                                        p["instr_id"] }}</a>
+                                </th> -->
+                                <th> {{ p["instr_date"] }} </th>
+                                <!-- <th max-lenght="20"> {{ p["instruct"] }} </th> -->
+                                <th><input class=" text-primary link" style="border: none; background: none;" disabled
+                                        type="text" maxlength="20" data-bs-toggle="modal"
+                                        data-bs-target="#more{{ p['instr_id'] }}" value="{{ p['instruct'] }} "> </th>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <hr>
+                <p class="text-danger font-weight-bolder">الاستفسارات والمتابعة</p>
+                <div class="row justify-content-center user-social-link">
+                    <div class="col-auto"><a href="https://www.facebook.com/groups/428616030899255/"><i
+                                class="fab fa-facebook text-facebook"></i></a></div>
+                    <div class="col-auto"><a href="#!"><i class="fab fa-twitter text-twitter"></i></a></div>
+                    <div class="col-auto"><a href="https://wa.me/201060711008"><i
+                                class="fab fa-whatsapp-square text-info"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- // modal view -->
+{% for p in instdata %}
+<div class="modal fade" id="more{{ p['instr_id'] }}" tabindex="-1" aria-labelledby="clientModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <!-- form action="/add_service" method="post" -->
+            <form action="/pendreq" method="POST">
+                <div class="modal-header">
+                    <h5 class="modal-title text-danger" id="clientModalLabel">{{p['user']}} التعليمات بالتفاصيل
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">&times;
+                    </button>
+                </div>
+                <!-- modal body table for testing -->
+                <div class="modal-body">
+                    <table class="table sortable table-striped">
+                        <thead>
+                            <tr>
+                                <th> Date </th>
+                                <th> instruct </th>
+                                <th> </th>
+                                <th> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <td>{{ p["instr_date"] }}</td>
+                            <td colspan="2">{{ p["instruct"] }}
+                                <!-- <textarea style="text-align: right; width: 100%; height: 40%;" name="details" id=""
+                                    cols="" rows="">
+                            </textarea> -->
+                            </td>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endfor %}
 
-    </tbody>
 
-</table>
+<style type="text/css">
+    .card.user-card {
+        border-top: none;
+        -webkit-box-shadow: 0 0 1px 2px rgba(0, 0, 0, 0.05), 0 -2px 1px -2px rgba(0, 0, 0, 0.04), 0 0 0 -1px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 0 1px 2px rgba(0, 0, 0, 0.05), 0 -2px 1px -2px rgba(0, 0, 0, 0.04), 0 0 0 -1px rgba(0, 0, 0, 0.05);
+        -webkit-transition: all 150ms linear;
+        transition: all 150ms linear;
+    }
+
+    .card {
+        border-radius: 5px;
+        -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+        box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+        border: none;
+        margin-bottom: 30px;
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .card .card-header {
+        background-color: transparent;
+        border-bottom: none;
+        padding: 25px;
+    }
+
+    .card .card-header h5 {
+        margin-bottom: 0;
+        color: #222;
+        font-size: 14px;
+        font-weight: 600;
+        display: inline-block;
+        margin-right: 10px;
+        line-height: 1.4;
+    }
+
+    .card .card-header+.card-block,
+    .card .card-header+.card-block-big {
+        padding-top: 0;
+    }
+
+    .user-card .card-block {
+        text-align: right;
+    }
+
+    .card .card-block {
+        padding: 0;
+    }
+
+    .user-card .card-block .user-image {
+        position: relative;
+        margin: 0 auto;
+        display: inline-block;
+        padding: 5px;
+        width: 110px;
+        height: 110px;
+    }
+
+    .user-card .card-block .user-image img {
+        z-index: 20;
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        width: 100px;
+        height: 100px;
+    }
+
+    .img-radius {
+        border-radius: 50%;
+    }
+
+    .f-w-600 {
+        font-weight: 600;
+    }
+
+    .m-b-10 {
+        color: #59e0c5;
+        margin-bottom: 10px;
+    }
+
+    .m-t-25 {
+        margin-top: 25px;
+    }
+
+    .m-t-15 {
+        margin-top: 15px;
+    }
+
+    .card .card-block p {
+        line-height: 1.4;
+    }
+
+    .text-muted {
+        color: #919aa3 !important;
+    }
+
+    .user-card .card-block .activity-leval li.active {
+        background-color: #2ed8b6;
+    }
+
+    .user-card .card-block .activity-leval li {
+        display: inline-block;
+        width: 15%;
+        height: 4px;
+        margin: 0 3px;
+        background-color: #ccc;
+    }
+
+    .user-card .card-block .counter-block {
+        color: #fff;
+    }
+
+    .bg-c-blue {
+        background: linear-gradient(45deg, #4099ff, #73b4ff);
+    }
+
+    .bg-c-green {
+        background: linear-gradient(45deg, #2ed8b6, #59e0c5);
+    }
+
+    .bg-c-yellow {
+        background: linear-gradient(45deg, #FFB64D, #ffcb80);
+    }
+
+    .bg-c-pink {
+        background: linear-gradient(45deg, #FF5370, #ff869a);
+    }
+
+    .m-t-10 {
+        margin-top: 10px;
+    }
+
+    .p-20 {
+        padding: 20px;
+    }
+
+    .user-card .card-block .user-social-link i {
+        font-size: 30px;
+    }
+
+    .text-facebook {
+        color: #3B5997;
+    }
+
+    .text-twitter {
+        color: #42C0FB;
+    }
+
+    .text-dribbble {
+        color: #EC4A89;
+    }
+
+    .table {
+        overflow: hidden;
+        display: table;
+    }
+
+    @media(max-width=576px) {
+        .navbar {
+            position: relative !important;
+        }
+
+        .p-5 {
+            padding: 0 !important;
+        }
+
+        .card .card-block {
+            padding: 1px;
+            word-wrap: normal;
+        }
+    }
+</style>
 
 {% endblock %}

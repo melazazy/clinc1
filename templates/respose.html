@@ -1,0 +1,28 @@
+{% for row in employeelist %}
+
+<div class="row">
+    <div class="col-lg-6">
+        <ul>
+            <li><strong>الاسم:</strong> <input type="text" name="name" value="{{row.name}}" id="name">
+            </li>
+
+            <li><strong>السن:</strong> <input type="number" name="age" value="{{row.age}}" id="age">
+            <li><strong>الطول:</strong> <input type="number" name="tall" value="" id="tall">
+            </li>
+            <li><strong>الوزن:</strong> <input type="number" name="weight" value="" id="weight">
+        </ul>
+    </div>
+    <div class="col-lg-6">
+        <ul>
+            <li><strong>العظام:</strong> <input type="number" name="bone" value="">
+            <li> <strong>العضلات:</strong> <input type="number" name="muscles" value="">
+            <li> <strong>الدهون:</strong> <input type="number" name="fat" value="">
+            <li><strong>المياه:</strong>
+                <input type="number" name="water" value="">
+            </li>
+            <li><strong>السعرات:</strong><input type="number" name="calories" value="">
+            </li>
+        </ul>
+    </div>
+</div>
+{%endfor%}
