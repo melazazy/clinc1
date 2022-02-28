@@ -66,8 +66,10 @@
                         <div class="col-4">
                             <img src="../static/icons/bone.png" alt="strong" width="25px" srcset=""> العظام
                             <p>
-                                {% if detdata.lenght >0%}
-                                {{detdata[detdata.lenght-1].bone}}
+                                {% if detdata[0]%}
+                                {{detdata[0].bone}}
+                                <br>
+                                {{detdata.lenght}}
                                 {% endif %}</p>
                         </div>
                         <div class="col-4">
