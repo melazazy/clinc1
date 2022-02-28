@@ -7,28 +7,26 @@
         {% for l in list %}
         <option value="{{ l.phone }}">{{ l.phone }}--{{l.name}}
         </option>
-        <!-- <li><strong>الاسم:</strong> <input type="text" name="name" value="{{ l.name }}" id="name">{{ l.name }}
-        </li> -->
         {% endfor%}
     </select>
     <div class="row">
         <div class="col-lg-6">
             <ul>
                 <li><strong>السن:</strong> <input type="number" name="age" value="" id="age">
-                <li><strong>الطول:</strong> <input type="number" name="tall" value="" id="tall">
+                <li><strong>الطول:</strong> <input type="number" name="tall" value="" id="tall" step=".001">
                 </li>
-                <li><strong>العظام:</strong> <input type="number" name="bone" value="">
-                <li> <strong>العضلات:</strong> <input type="number" name="muscles" value="">
+                <li><strong>العظام:</strong> <input type="number" name="bone" value="" step=".001">
+                <li> <strong>العضلات:</strong> <input type="number" name="muscles" value="" step=".001">
             </ul>
         </div>
         <div class="col-lg-6">
             <ul>
-                <li><strong>الوزن:</strong> <input type="number" name="weight" value="" id="weight">
-                <li> <strong>الدهون:</strong> <input type="number" name="fat" value="">
+                <li><strong>الوزن:</strong> <input type="number" name="weight" value="" id="weight" step=".001">
+                <li> <strong>الدهون:</strong> <input type="number" name="fat" value="" step=".001">
                 <li><strong>المياه:</strong>
-                    <input type="number" name="water" value="">
+                    <input type="number" name="water" value="" step=".001">
                 </li>
-                <li><strong>السعرات:</strong><input type="number" name="calories" value="">
+                <li><strong>السعرات:</strong><input type="number" name="calories" value="" step=".001">
                 </li>
             </ul>
         </div>
